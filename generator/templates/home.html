@@ -42,9 +42,11 @@
           <div class="col-8">
             <h6 for="length"> Select the length of your password:</h6>
             <input type="number" id="length" name="length" checked=true 
+            oninput="formControlRange.value=length.value"
             value={% if length %} {{length}} {% else %} 12 {% endif %}
             required></input>
-            <input type="range" class="form-control-range" id="formControlRange">
+            <input type="range" class="form-control-range" id="formControlRange"
+            min="6" max="40" oninput="length.value=formControlRange.value">
           </div>
           <div class="col-4">
             <ul >
