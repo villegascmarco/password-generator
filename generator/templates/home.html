@@ -10,13 +10,19 @@
     <p class="lead">Use our online password generator to instantly create a secure, random password.</p>
   </div>
 </div>
+&nbsp;&nbsp;
 <div class="container">
   <div class="row">
     <div class="col-3">
     </div>
     <div class="col-6">
       {% if generated_password%}
-      <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" value={{generated_password}}>
+      <div class="input-group 2mb-3">
+        <input type="text" id="generated_password" class="form-control" value={{generated_password}} aria-describedby="basic-addon2" readonly>
+        <div class="input-group-append">
+          <button type="button"  class="input-group-text" onclick="copyText()">Copy password</button>
+        </div>
+      </div>
       {% endif %}
     </div>
     <div class="col-3">
@@ -31,30 +37,65 @@
     <div class="col-6">
       <form action="" method="POST" class="border">
         <!--- csrf_token->Prevent Cross-site attack adding a token in the request -->
-      {% csrf_token %}
-      <h6 for="length"> Select the length of your password:</h6>
-      <input type="number" id="length" name="length" checked=true value={% if length %} {{length}} {% else %} 12 {% endif %}required></input>
-      <input type="range" class="form-control-range" id="formControlRange">
-    
-      <label for="uppercase">Uppercase</label>
-      <input type="checkbox" id="uppercase" name="uppercase" checked=true></input>
-    
-      <label for="lowercase">Lowercase</label>
-      <input type="checkbox" id="lowercase" name="lowercase" checked=true></input>
-    
-      <label for="numbers">Numbers</label>
-      <input type="checkbox" id="numbers" name="numbers" checked=true></input>
-    
-      <label for="symbols">Symbols</label>
-      <input type="checkbox" id="symbols" name="symbols" checked=true></input>
-    
-      <button type="submit">Generate Password</button>
+      {% csrf_token %}      
+      <div class="row">
+          <div class="col-8">
+            <h6 for="length"> Select the length of your password:</h6>
+            <input type="number" id="length" name="length" checked=true 
+            value={% if length %} {{length}} {% else %} 12 {% endif %}
+            required></input>
+            <input type="range" class="form-control-range" id="formControlRange">
+          </div>
+          <div class="col-4">
+            <ul >
+              <li class="list-group-item">
+                <label for="uppercase">Uppercase</label>
+                <input type="checkbox" id="uppercase" name="uppercase" checked=true></input>
+              </li>
+            </ul>
+            <ul >
+              <li class="list-group-item">
+                <label for="lowercase">Lowercase</label>
+                <input type="checkbox" id="lowercase" name="lowercase" checked=true></input>
+              </li>
+            </ul>
+            <ul >
+              <li class="list-group-item">
+                <label for="numbers">Numbers</label>
+                <input type="checkbox" id="numbers" name="numbers" checked=true></input>
+              </ul>
+            </li>
+            <ul >
+              <li class="list-group-item">
+                <label for="symbols">Symbols</label>
+                <input type="checkbox" id="symbols" name="symbols" checked=true></input>
+              </li>
+            </ul>
+          </div>
+      </div>
+      &nbsp;&nbsp;
+      <div class="row">
+        <div class="col"></div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Generate Password</button>
+        </div>
+        <div class="col"></div>
+      </div>  
     </form>
-    </div>
-    <div class="col-3">
-    </div>
   </div>
 </div>
+  <script>
+    function copyText() {
+       /* Get the text field */
+        var copyText = document.getElementById('generated_password');
 
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        navigator.clipboard.writeText(copyText.value);
+    } 
+    </script>
 {% endblock content %}
 
