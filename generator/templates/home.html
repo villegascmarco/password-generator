@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}Password Generator{% endblock title %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Password Genarator Tool</h1>
+    <p class="lead">Use our online password generator to instantly create a secure, random password.</p>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+      {% if generated_password%}
+      <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" value={{generated_password}}>
+      {% endif %}
+    </div>
+    <div class="col-3">
+    </div>
+  </div>
+</div>
+&nbsp;&nbsp;
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+      <form action="" method="POST" class="border">
+        <!--- csrf_token->Prevent Cross-site attack adding a token in the request -->
+      {% csrf_token %}
+      <h6 for="length"> Select the length of your password:</h6>
+      <input type="number" id="length" name="length" checked=true value={% if length %} {{length}} {% else %} 12 {% endif %}required></input>
+      <input type="range" class="form-control-range" id="formControlRange">
+    
+      <label for="uppercase">Uppercase</label>
+      <input type="checkbox" id="uppercase" name="uppercase" checked=true></input>
+    
+      <label for="lowercase">Lowercase</label>
+      <input type="checkbox" id="lowercase" name="lowercase" checked=true></input>
+    
+      <label for="numbers">Numbers</label>
+      <input type="checkbox" id="numbers" name="numbers" checked=true></input>
+    
+      <label for="symbols">Symbols</label>
+      <input type="checkbox" id="symbols" name="symbols" checked=true></input>
+    
+      <button type="submit">Generate Password</button>
+    </form>
+    </div>
+    <div class="col-3">
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
