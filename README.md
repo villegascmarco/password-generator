@@ -7,7 +7,7 @@ This Django project intends to show my current skills with this framework. Still
 To deploy this project run the following commands:
 
 ```bash
-  python3 -m venv venv
+  python -m venv venv
 
   source venv/Scripts/activate
 
